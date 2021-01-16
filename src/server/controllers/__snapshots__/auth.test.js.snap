@@ -5,10 +5,10 @@ Object {
   "message": Array [
     ValidationErrorItem {
       "instance": Object {
-        "createdAt": 2021-01-16T19:46:43.570Z,
+        "createdAt": 2021-01-16T20:49:01.853Z,
         "email": "testemail@email.com",
         "id": null,
-        "updatedAt": 2021-01-16T19:46:43.570Z,
+        "updatedAt": 2021-01-16T20:49:01.853Z,
         "username": "testuser",
       },
       "message": "users.username must be unique",
@@ -36,13 +36,50 @@ Object {
 }
 `;
 
+exports[`Should fail on signin in with a missing field 1`] = `
+Object {
+  "errors": Array [
+    Object {
+      "field": "password",
+      "message": "The password is a required field.",
+    },
+  ],
+  "message": "Validation failed.",
+}
+`;
+
+exports[`Should fail on signin in with an unexisting email 1`] = `
+Object {
+  "message": "Email provided not found.",
+}
+`;
+
+exports[`Should fail on signin in with wrong password 1`] = `
+Object {
+  "message": "Wrong password provided.",
+}
+`;
+
+exports[`Should sign in a previously registered user 1`] = `
+Object {
+  "data": Object {
+    "createdAt": 2021-01-16T20:49:01.000Z,
+    "email": "testemail@email.com",
+    "id": 1,
+    "updatedAt": 2021-01-16T20:49:01.000Z,
+    "username": "testuser",
+  },
+  "message": "You have successfully logged in.",
+}
+`;
+
 exports[`Should sign up a new a user. 1`] = `
 Object {
   "data": Object {
-    "createdAt": 2021-01-16T19:46:43.480Z,
+    "createdAt": 2021-01-16T20:49:01.777Z,
     "email": "testemail@email.com",
     "id": 1,
-    "updatedAt": 2021-01-16T19:46:43.480Z,
+    "updatedAt": 2021-01-16T20:49:01.777Z,
     "username": "testuser",
   },
   "message": "You have successfully signed up.",

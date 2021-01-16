@@ -66,3 +66,78 @@ it('Should fail if there a missing fields.', async () => {
   expect(mockResponse.status).toBeCalledWith(400);
   expect(mockResponse.send.mock.calls[0][0]).toMatchSnapshot();
 });
+
+it('Should sign in a previously registered user', async () => {
+  const mockRequest = {
+    body: {
+      email: 'testemail@email.com',
+      password: '12345678'
+    }
+  };
+
+  const mockResponse = {
+    send: jest.fn(() => mockResponse),
+    status: jest.fn(() => mockResponse)
+  };
+
+  await AuthController.signin(mockRequest, mockResponse);
+
+  expect(mockResponse.status).toBeCalledWith(200);
+  expect(mockResponse.send.mock.calls[0][0]).toMatchSnapshot();
+});
+
+it('Should fail on signin in with an unexisting email', async () => {
+  const mockRequest = {
+    body: {
+      email: 'wrongemail@email.com',
+      password: '12345678'
+    }
+  };
+
+  const mockResponse = {
+    send: jest.fn(() => mockResponse),
+    status: jest.fn(() => mockResponse)
+  };
+
+  await AuthController.signin(mockRequest, mockResponse);
+
+  expect(mockResponse.status).toBeCalledWith(400);
+  expect(mockResponse.send.mock.calls[0][0]).toMatchSnapshot();
+});
+
+it('Should fail on signin in with wrong password', async () => {
+  const mockRequest = {
+    body: {
+      email: 'testemail@email.com',
+      password: '123456789123'
+    }
+  };
+
+  const mockResponse = {
+    send: jest.fn(() => mockResponse),
+    status: jest.fn(() => mockResponse)
+  };
+
+  await AuthController.signin(mockRequest, mockResponse);
+
+  expect(mockResponse.status).toBeCalledWith(400);
+  expect(mockResponse.send.mock.calls[0][0]).toMatchSnapshot();
+});
+
+it('Should fail on signin in with a missing field', async () => {
+  const mockRequest = {
+    body: {
+      email: 'testemail@email.com'
+    }
+  };
+
+  const mockResponse = {
+    send: jest.fn(() => mockResponse),
+    status: jest.fn(() => mockResponse)
+  };
+
+  await AuthController.signin(mockRequest, mockResponse);
+
+  expect(mockResponse.status).toBeCalledWith(400);
+  expect(mockResponse.send.mock.calls[0][0]).toMatchSnapshot();
+});
