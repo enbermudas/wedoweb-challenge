@@ -3,7 +3,6 @@ import db from '../config/sequelize';
 import validators from '../validators';
 
 const User = db.users;
-const Op = db.Sequelize.Op;
 
 const signup = async (req, res) => {
   const errors = validators.signup(req.body);
