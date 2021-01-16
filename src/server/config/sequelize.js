@@ -8,7 +8,9 @@ const sequelize = new Sequelize(DB, USER, PASSWORD, {
   host: HOST,
   dialect,
   operatorsAliases: false,
-  pool
+  pool,
+  logging: false,
+  operatorsAliases: false
 });
 
 const db = {};

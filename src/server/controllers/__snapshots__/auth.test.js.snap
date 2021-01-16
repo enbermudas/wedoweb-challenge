@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should fail if the unique constraint is violated. 1`] = `
+Object {
+  "message": Array [
+    ValidationErrorItem {
+      "instance": Object {
+        "createdAt": 2021-01-16T19:46:43.570Z,
+        "email": "testemail@email.com",
+        "id": null,
+        "updatedAt": 2021-01-16T19:46:43.570Z,
+        "username": "testuser",
+      },
+      "message": "users.username must be unique",
+      "origin": "DB",
+      "path": "users.username",
+      "type": "unique violation",
+      "validatorArgs": Array [],
+      "validatorKey": "not_unique",
+      "validatorName": null,
+      "value": "testuser",
+    },
+  ],
+}
+`;
+
+exports[`Should fail if there a missing fields. 1`] = `
+Object {
+  "errors": Array [
+    Object {
+      "field": "password",
+      "message": "The password is a required field.",
+    },
+  ],
+  "message": "Validation failed.",
+}
+`;
+
+exports[`Should sign up a new a user. 1`] = `
+Object {
+  "data": Object {
+    "createdAt": 2021-01-16T19:46:43.480Z,
+    "email": "testemail@email.com",
+    "id": 1,
+    "updatedAt": 2021-01-16T19:46:43.480Z,
+    "username": "testuser",
+  },
+  "message": "You have successfully signed up.",
+}
+`;
