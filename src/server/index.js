@@ -1,5 +1,9 @@
 import signale from 'signale';
 import server from './config/express';
+import db from './config/sequelize';
+
+// Database
+db.sequelize.sync();
 
 const port = process.env.PORT || 8080;
 
