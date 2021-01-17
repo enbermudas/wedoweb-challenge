@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
   return WebsiteController.list(req, res);
 });
 
-router.post('/create', (req, res) => {
+router.post('/', (req, res) => {
   return WebsiteController.create(req, res);
 });
 
