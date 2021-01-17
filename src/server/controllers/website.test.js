@@ -53,3 +53,18 @@ it('Should fail if no url is provided.', async () => {
   expect(mockResponse.status).toBeCalledWith(400);
   expect(mockResponse.send.mock.calls[0][0]).toMatchSnapshot();
 });
+
+it('Should list created websites.', async () => {
+  const mockRequest = {};
+
+  const mockResponse = {
+    send: jest.fn(() => mockResponse),
+    status: jest.fn(() => mockResponse)
+  };
+
+  const data = await WebsiteController.list(mockRequest, mockResponse);
+
+  expect(mockResponse.status).toBeCalledWith(200);
+  expect(mockResponse.send.mock.calls[0][0]).toMatchSnapshot();
+  expect(mockResponse.send.mock.calls[0][0].data.length).toBeGreaterThan(0);
+});

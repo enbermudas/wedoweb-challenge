@@ -24,6 +24,18 @@ const create = async (req, res) => {
   }
 };
 
+const list = async (req, res) => {
+  try {
+    const data = await Website.findAll();
+    res.status(200).send({ data });
+  } catch (error) {
+    res.status(500).send({
+      message: error.errors
+    });
+  }
+}
+
 export default {
-  create
+  create,
+  list
 };
