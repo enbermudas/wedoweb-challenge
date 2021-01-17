@@ -1,5 +1,5 @@
 const Website = (sequelize, Sequelize) => {
-  const model = sequelize.define('website', {
+  const model = sequelize.define('websites', {
     url: {
       type: Sequelize.STRING
     }
