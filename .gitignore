@@ -128,3 +128,6 @@ yarn-error.log*
 
 # db config files
 db.config.js
+
+# snapshots
+*.snap
