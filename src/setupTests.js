@@ -1,5 +1,19 @@
-// jest-dom adds custom jest matchers for asserting on DOM nodes.
-// allows you to do things like:
-// expect(element).toHaveTextContent(/react/i)
-// learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom';
+import db from './server/config/sequelize';
+
+const cleanDB = async (db) => {
+  const tableNames = Object.keys(db.sequelize.models);
+
+  for (let i = 0; i < tableNames.length; i++) {
+    await db.sequelize.query(`TRUNCATE TABLE ${tableNames[i]};`);
+  }
+};
+
+beforeAll(async () => {
+  await db.sequelize.sync({ force: true });
+});
+
+afterAll(async () => {
+  await cleanDB(db);
+  await db.sequelize.close();
+});

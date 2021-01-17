@@ -1,12 +1,4 @@
-import db from '../config/sequelize';
 import WebsiteController from './website';
-
-beforeAll(async () => await db.sequelize.sync({ alter: true, force: false }));
-
-afterAll(async () => {
-  await db.sequelize.dropAllSchemas({});
-  db.sequelize.close();
-});
 
 it('Should create a new website.', async () => {
   const mockRequest = {

@@ -1,12 +1,4 @@
-import db from '../config/sequelize';
 import AuthController from './auth';
-
-beforeAll(async () => await db.sequelize.sync({ alter: true, force: false }));
-
-afterAll(async () => {
-  await db.sequelize.dropAllSchemas({});
-  db.sequelize.close();
-});
 
 it('Should sign up a new a user.', async () => {
   const mockRequest = {
