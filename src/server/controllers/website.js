@@ -3,7 +3,7 @@ import validators from '../validators';
 
 const Website = db.websites;
 
-const createWebsite = async (req, res) => {
+const create = async (req, res) => {
   const errors = validators.createWebsite(req.body);
   if (errors.length !== 0) {
     return res.status(400).send({
@@ -25,5 +25,5 @@ const createWebsite = async (req, res) => {
 };
 
 export default {
-  createWebsite
+  create
 };

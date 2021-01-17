@@ -20,7 +20,7 @@ it('Should create a new website.', async () => {
     status: jest.fn(() => mockResponse)
   };
 
-  await WebsiteController.createWebsite(mockRequest, mockResponse);
+  await WebsiteController.create(mockRequest, mockResponse);
 
   expect(mockResponse.status).toBeCalledWith(201);
   expect(mockResponse.send.mock.calls[0][0]).toMatchSnapshot();
@@ -38,7 +38,7 @@ it('Should reject an invalid url.', async () => {
     status: jest.fn(() => mockResponse)
   };
 
-  await WebsiteController.createWebsite(mockRequest, mockResponse);
+  await WebsiteController.create(mockRequest, mockResponse);
 
   expect(mockResponse.status).toBeCalledWith(400);
   expect(mockResponse.send.mock.calls[0][0]).toMatchSnapshot();
@@ -56,7 +56,7 @@ it('Should fail if no url is provided.', async () => {
     status: jest.fn(() => mockResponse)
   };
 
-  await WebsiteController.createWebsite(mockRequest, mockResponse);
+  await WebsiteController.create(mockRequest, mockResponse);
 
   expect(mockResponse.status).toBeCalledWith(400);
   expect(mockResponse.send.mock.calls[0][0]).toMatchSnapshot();
