@@ -1,17 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { message } from 'antd';
+import { connect } from 'react-redux';
+
 import Navbar from './components/Navbar';
 import SignInModal from './components/SignInModal';
-import { connect } from 'react-redux';
+import SignUpModal from './components/SignUpModal';
 
 const App = (props) => {
   const { alert, authenticated } = props;
 
   const [showSignIn, setShowSignIn] = useState(false);
+  const [showSignUp, setShowSignUp] = useState(false);
 
   useEffect(() => {
-    if (authenticated) setShowSignIn(false);
+    if (authenticated) {
+      setShowSignIn(false);
+      setShowSignUp(false);
+    }
   }, [authenticated]);
 
   useEffect(() => {
@@ -21,13 +27,22 @@ const App = (props) => {
 
   return (
     <div className="App">
-      <Navbar isGuess={!authenticated} onSignIn={() => setShowSignIn(true)} />
+      <Navbar
+        isGuess={!authenticated}
+        onSignIn={() => setShowSignIn(true)}
+        onSignUp={() => setShowSignUp(true)}
+      />
 
       <SignInModal
         isGuess={!authenticated}
         visible={showSignIn}
-        onSignIn={() => setShowSignIn(false)}
         onClose={() => setShowSignIn(false)}
+      />
+
+      <SignUpModal
+        isGuess={!authenticated}
+        visible={showSignUp}
+        onClose={() => setShowSignUp(false)}
       />
     </div>
   );

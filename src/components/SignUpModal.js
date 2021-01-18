@@ -8,27 +8,27 @@ const layout = {
   wrapperCol: { span: 16 }
 };
 
-const SignInModal = (props) => {
-  const { signin, visible, onClose } = props;
+const SignUpModal = (props) => {
+  const { signup, visible, onClose } = props;
 
   const [loading, setLoading] = useState(false);
 
   const handleFinish = (values) => {
     setLoading(true);
 
-    const { email, password } = values;
+    const { username, email, password } = values;
 
-    signin({ email, password }).then(() => setLoading(false));
+    signup({ username, email, password }).then(() => setLoading(false));
   };
 
   return (
     <Modal
-      title="Sign In"
+      title="Sign Up"
       visible={visible}
       onCancel={() => onClose()}
       footer={[
         <Button
-          form="signin-form"
+          form="signup-form"
           key="submit"
           htmlType="submit"
           type="primary"
@@ -40,10 +40,14 @@ const SignInModal = (props) => {
     >
       <Form
         {...layout}
-        id="signin-form"
-        name="signin-form"
+        id="signup-form"
+        name="signup-form"
         onFinish={(values) => handleFinish(values)}
       >
+        <Form.Item label="Username" name="username" rules={[{ required: true }]}>
+          <Input />
+        </Form.Item>
+
         <Form.Item
           label="E-mail address"
           name="email"
@@ -62,14 +66,14 @@ const SignInModal = (props) => {
   );
 };
 
-SignInModal.propTypes = {
-  signin: PropTypes.func.isRequired,
+SignUpModal.propTypes = {
+  signup: PropTypes.func.isRequired,
   visible: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired
 };
 
 const mapDispatch = (dispatch) => ({
-  signin: (user) => dispatch.auth.signinAPI(user)
+  signup: (user) => dispatch.auth.signupAPI(user)
 });
 
-export default connect(null, mapDispatch)(SignInModal);
+export default connect(null, mapDispatch)(SignUpModal);

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import './Navbar.css';
 
 const Navbar = (props) => {
-  const { isGuess, onSignIn, logout } = props;
+  const { isGuess, onSignIn, onSignUp, logout } = props;
 
   return (
     <PageHeader
@@ -19,7 +19,7 @@ const Navbar = (props) => {
               <Button key="1" onClick={() => onSignIn()}>
                 Sign In
               </Button>,
-              <Button key="2" type="primary">
+              <Button key="2" type="primary" onClick={() => onSignUp()}>
                 Join us!
               </Button>
             ]
@@ -36,6 +36,7 @@ const Navbar = (props) => {
 Navbar.propTypes = {
   isGuess: PropTypes.bool.isRequired,
   onSignIn: PropTypes.func.isRequired,
+  onSignUp: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired
 };
 
