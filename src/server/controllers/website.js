@@ -12,7 +12,11 @@ const create = async (req, res) => {
     });
   }
 
-  const website = { url: req.body.url };
+  const domain = req.body.url.match(
+    /[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9](?:\.[a-zA-Z]{2,})+/gi
+  )[0];
+
+  const website = { url: req.body.url, domain };
 
   try {
     const data = await Website.create(website);
@@ -26,7 +30,14 @@ const create = async (req, res) => {
 
 const list = async (req, res) => {
   try {
-    const data = await Website.findAll();
+    const data = await Website.findAll({
+      attributes: [
+        'domain',
+        [db.sequelize.fn('count', db.sequelize.col('domain')), 'cnt']
+      ],
+      group: ['domain']
+    });
+
     res.status(200).send({ data });
   } catch (error) {
     res.status(500).send({
