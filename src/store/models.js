@@ -14,14 +14,18 @@ export const alert = {
 
 export const auth = {
   state: {
-    user: {}
+    user: {},
+    authenticated: false
   },
   reducers: {
     signin(state, payload) {
-      return { ...state, user: payload };
+      return { ...state, user: payload, authenticated: true };
     },
     signup(state, payload) {
-      return { ...state, user: payload };
+      return { ...state, user: payload, authenticated: true };
+    },
+    logout() {
+      return { user: {}, authenticated: false };
     }
   },
   effects: (dispatch) => ({
