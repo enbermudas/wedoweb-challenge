@@ -3,7 +3,7 @@ import server from './config/express';
 import db from './config/sequelize';
 
 // Database
-db.sequelize.sync();
+db.sequelize.sync({ alter: true });
 
 const port = process.env.PORT || 8080;
 
