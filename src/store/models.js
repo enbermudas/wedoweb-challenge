@@ -3,14 +3,11 @@ import axios from 'axios';
 export const alert = {
   state: {
     message: '',
-    show: false
+    type: ''
   },
   reducers: {
-    display(state, payload) {
-      return { ...state, message: payload, show: true };
-    },
-    hide(state, keep) {
-      return { ...state, message: keep ? state.message : '', show: false };
+    display(state, { message, type }) {
+      return { ...state, message, type };
     }
   }
 };
@@ -41,16 +38,13 @@ export const auth = {
 
         dispatch.auth.signin(data);
 
-        dispatch.alert.display(message, 'success');
-
-        setTimeout(() => dispatch.alert.hide(), 3000);
+        dispatch.alert.display({ message, type: 'success' });
       } catch (error) {
-        dispatch.alert.display(
-          error.response.data.message || 'Oops! There was an error. Try again later.',
-          'error'
-        );
-
-        setTimeout(() => dispatch.alert.hide(true), 3000);
+        dispatch.alert.display({
+          message:
+            error.response.data.message || 'Oops! There was an error. Try again later.',
+          type: 'error'
+        });
       }
     },
     async signupAPI(payload) {
@@ -67,16 +61,13 @@ export const auth = {
 
         dispatch.auth.signup(data);
 
-        dispatch.alert.display(message, 'success');
-
-        setTimeout(() => dispatch.alert.hide(), 3000);
+        dispatch.alert.display({ message, type: 'success' });
       } catch (error) {
-        dispatch.alert.display(
-          error.response.data.message || 'Oops! There was an error. Try again later.',
-          'error'
-        );
-
-        setTimeout(() => dispatch.alert.hide(true), 3000);
+        dispatch.alert.display({
+          message:
+            error.response.data.message || 'Oops! There was an error. Try again later.',
+          type: 'error'
+        });
       }
     }
   })
