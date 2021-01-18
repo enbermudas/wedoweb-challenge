@@ -33,7 +33,7 @@ const list = async (req, res) => {
       message: error.errors
     });
   }
-}
+};
 
 export default {
   create,
