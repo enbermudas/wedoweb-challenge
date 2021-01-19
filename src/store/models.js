@@ -97,7 +97,7 @@ export const website = {
           url
         });
 
-        dispatch.website.fetch();
+        dispatch.website.fetchAPI();
 
         dispatch.alert.display({ message, type: 'success' });
       } catch (error) {
