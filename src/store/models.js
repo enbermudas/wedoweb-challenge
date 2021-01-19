@@ -76,3 +76,52 @@ export const auth = {
     }
   })
 };
+
+export const website = {
+  state: {
+    sites: []
+  },
+  reducers: {
+    fetch(state, sites) {
+      return { ...state, sites };
+    }
+  },
+  effects: (dispatch) => ({
+    async createAPI(payload) {
+      const { url } = payload;
+
+      try {
+        const {
+          data: { message }
+        } = await axios.post('/api/v1/website', {
+          url
+        });
+
+        dispatch.website.fetch();
+
+        dispatch.alert.display({ message, type: 'success' });
+      } catch (error) {
+        dispatch.alert.display({
+          message:
+            error.response.data.message || 'Oops! There was an error. Try again later.',
+          type: 'error'
+        });
+      }
+    },
+    async fetchAPI() {
+      try {
+        const {
+          data: { data }
+        } = await axios.get('/api/v1/website');
+
+        dispatch.website.fetch(data);
+      } catch (error) {
+        dispatch.alert.display({
+          message:
+            error.response.data.message || 'Oops! There was an error. Try again later.',
+          type: 'error'
+        });
+      }
+    }
+  })
+};

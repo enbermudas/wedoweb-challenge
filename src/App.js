@@ -6,12 +6,17 @@ import { connect } from 'react-redux';
 import Navbar from './components/Navbar';
 import SignInModal from './components/SignInModal';
 import SignUpModal from './components/SignUpModal';
+import DomainsList from './components/DomainsList';
 
 const App = (props) => {
-  const { alert, authenticated } = props;
+  const { alert, authenticated, fetch } = props;
 
   const [showSignIn, setShowSignIn] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
+
+  useEffect(() => {
+    fetch();
+  }, []);
 
   useEffect(() => {
     if (authenticated) {
@@ -33,17 +38,23 @@ const App = (props) => {
         onSignUp={() => setShowSignUp(true)}
       />
 
-      <SignInModal
-        isGuess={!authenticated}
-        visible={showSignIn}
-        onClose={() => setShowSignIn(false)}
-      />
+      {!authenticated && (
+        <>
+          <SignInModal
+            isGuess={!authenticated}
+            visible={showSignIn}
+            onClose={() => setShowSignIn(false)}
+          />
 
-      <SignUpModal
-        isGuess={!authenticated}
-        visible={showSignUp}
-        onClose={() => setShowSignUp(false)}
-      />
+          <SignUpModal
+            isGuess={!authenticated}
+            visible={showSignUp}
+            onClose={() => setShowSignUp(false)}
+          />
+        </>
+      )}
+
+      <DomainsList />
     </div>
   );
 };
@@ -53,7 +64,8 @@ App.propTypes = {
     message: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired
   }).isRequired,
-  authenticated: PropTypes.bool.isRequired
+  authenticated: PropTypes.bool.isRequired,
+  fetch: PropTypes.func.isRequired
 };
 
 const mapState = (state) => ({
@@ -61,4 +73,8 @@ const mapState = (state) => ({
   authenticated: state.auth.authenticated
 });
 
-export default connect(mapState)(App);
+const mapDispatch = (dispatch) => ({
+  fetch: () => dispatch.website.fetchAPI()
+});
+
+export default connect(mapState, mapDispatch)(App);
