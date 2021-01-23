@@ -4,6 +4,9 @@ Domain checker application created with React, Express and love.
 ## Configuration files
 Create a `db.config.js` based on the sample file named `db.config.example.js` and fill all the fields with the information about your SQL database.
 
+## Database
+Create a database and set the `HOST`, `USER`, `password` and `DB` on `db.config.js` accordingly to the data employed on your local environment.
+
 ## Dependencies
 Install all the dependencies by running `npm install` or `yarn`.
 
